@@ -1,0 +1,16 @@
+# This configuration assumes you have the Prometheus Operator installed in your cluster.
+# If not, you can install it from https://prometheus-operator.dev/
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: k8s-microservice
+  labels:
+    app: k8s-microservice
+spec:
+  selector:
+    matchLabels:
+      app: k8s-microservice
+  endpoints:
+  - port: http
+    path: /metrics
+    interval: 15s
